@@ -1,4 +1,4 @@
-# UUON Pstudio
+# 3dPstudio
 
 A browser-based 3D parametric design studio — generate AI 3D models from text prompts, explore sacred-geometry parametric forms in real time, and export everything as production-ready assets.
 

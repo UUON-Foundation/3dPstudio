@@ -1,12 +1,12 @@
 # 3dPstudio
 
-A browser-based 3D parametric design studio — generate AI 3D models from text prompts, explore sacred-geometry parametric forms in real time, and export everything as production-ready assets.
-
+A browser-based 3D parametric and AI generative design pstudio. Interact with parametric 3D mdoels, 4D models in 3D space utilizing (x,y,z) & u, v parameters. 
+Perfect for anything oen interated in mathematical abstract modes or the world 
 Built with React, Three.js (via React Three Fiber), and an Express/Node backend.
 
 ## Features
 
-- **Parametric Explorer** — real-time 3D curve and surface generation driven by adjustable mathematical parameters, rendered live in WebGL
+- **Parametric Explorer** real-time 3D curve and surface generation driven by adjustable mathematical parameters, rendered live in WebGL
 - **Generate 3D** — text-to-3D model generation powered by [Tripo3D](https://studio.tripo3d.ai/?via=phi1)
 - **AI Images** — AI-assisted image generation portal
 - **3D Models gallery** — a curated library of sacred-geometry and symbolic 3D models (Platonic solids, mandalas, sacred symbols), browsable and exportable

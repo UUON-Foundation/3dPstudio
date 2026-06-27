@@ -62,7 +62,7 @@ app.use((req, res, next) => {
 const isReplit = Boolean(process.env.REPL_ID);
 
 server.listen(
-  isReplit ? { port, host: "0.0.0.0", reusePort: true } : { port, host: "0.0.0.0" },
+  isReplit ? { port, host: "0.0.0.0", reusePort: true } : { port, host: "127.0.0.1" },
   () => {
     log(`serving on port ${port}`);
   }

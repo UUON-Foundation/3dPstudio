@@ -1,0 +1,300 @@
+@import url('../index.css');
+
+/* Additional global styles for the parametric engine */
+.parametric-engine {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Holographic UI effects */
+.holographic-panel {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(74, 144, 226, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 0 20px rgba(74, 144, 226, 0.1),
+    inset 0 0 20px rgba(74, 144, 226, 0.05);
+}
+
+.holographic-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(74, 144, 226, 0.1),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* Neon glow effects */
+.neon-text {
+  text-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor;
+}
+
+.neon-border {
+  box-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    inset 0 0 5px currentColor;
+}
+
+/* Mathematical equation display */
+.equation-display {
+  font-family: 'Computer Modern', 'Times New Roman', serif;
+  font-style: italic;
+}
+
+/* Performance indicators */
+.performance-indicator {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  z-index: 1000;
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(74, 144, 226, 0.6);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(74, 144, 226, 0.8);
+}
+
+/* Animation keyframes */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+}
+
+@keyframes matrix-rain {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Mathematical symbol styling */
+.math-symbol {
+  font-family: 'Computer Modern', 'Times New Roman', serif;
+  font-style: normal;
+  font-weight: bold;
+}
+
+/* Control panel specific styles */
+.control-panel {
+  min-width: 320px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.control-panel .slider-container {
+  position: relative;
+  margin: 10px 0;
+}
+
+.control-panel .parameter-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.control-panel .parameter-value {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #4a90e2;
+}
+
+/* Render panel specific styles */
+.render-panel {
+  min-width: 320px;
+}
+
+.color-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.color-preview-item {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.color-preview-item:hover {
+  transform: scale(1.1);
+}
+
+/* Game UI styles */
+.game-ui {
+  pointer-events: none;
+}
+
+.game-ui > * {
+  pointer-events: auto;
+}
+
+.game-hud {
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+}
+
+.game-score {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-shadow: 0 0 10px currentColor;
+}
+
+/* Tutorial styles */
+.tutorial-overlay {
+  backdrop-filter: blur(5px);
+}
+
+.tutorial-content {
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  color: #ffffff;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.tutorial-step-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.tutorial-step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.tutorial-step-dot.active {
+  background: #00ffff;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+.tutorial-step-dot.completed {
+  background: #00ff00;
+}
+
+.tutorial-step-dot.upcoming {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Loading states */
+.loading-spinner {
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-left: 2px solid #4a90e2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .control-panel,
+  .render-panel {
+    min-width: 280px;
+    max-width: 90vw;
+  }
+  
+  .tutorial-content {
+    max-width: 95vw;
+    max-height: 90vh;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .holographic-panel {
+    border-color: #ffffff;
+    background: #000000;
+  }
+  
+  .neon-text {
+    text-shadow: none;
+    font-weight: bold;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .pulse-glow,
+  .loading-spinner {
+    animation: none;
+  }
+  
+  * {
+    transition: none !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .control-panel,
+  .render-panel,
+  .game-ui,
+  .tutorial-overlay {
+    display: none;
+  }
+}

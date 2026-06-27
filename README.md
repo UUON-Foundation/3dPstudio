@@ -1,4 +1,4 @@
-# 3dPstudio
+# UUON Pstudio
 
 A browser-based 3D parametric design studio — generate AI 3D models from text prompts, explore sacred-geometry parametric forms in real time, and export everything as production-ready assets.
 
@@ -41,6 +41,17 @@ npm install
 
 Create a `.env` file in the project root:
 
+```
+TRIPO_API_KEY=your_tripo3d_key_here
+DATABASE_URL=your_postgres_connection_string_here
+```
+
+Local macOS note: if the dev server fails to bind with an `ENOTSUP` error on `0.0.0.0`, add this to your `.env`:
+
+```
+HOST=127.0.0.1
+```
+
 ### Run locally
 
 ```bash
@@ -67,18 +78,28 @@ This project deploys cleanly to [Railway](https://railway.com/):
 
 ## Project structure
 
+```
 client/
-index.html          # Vite entry point
-src/
-components/        # React components (3D scene, portals, UI)
-lib/                # Geometry/math utilities, state stores
-pages/
-public/
-models/             # Curated 3D model library (.glb)
-textures/            # Sacred-symbol texture sets
+  index.html          # Vite entry point
+  src/
+    components/        # React components (3D scene, portals, UI)
+    lib/                # Geometry/math utilities, state stores
+    pages/
+  public/
+    models/             # Curated 3D model library (.glb)
+    textures/            # Sacred-symbol texture sets
 server/
-index.ts             # Express entry point
-routes.ts             # API routes
-storage.ts             # Data access layer
+  index.ts             # Express entry point
+  routes.ts             # API routes
+  storage.ts             # Data access layer
 shared/
-schema.ts            # Shared DB schema (Drizzle)
+  schema.ts            # Shared DB schema (Drizzle)
+```
+
+## License
+
+MIT — see [LICENSE](./LICENSE) for details.
+
+## Acknowledgments
+
+3D generation powered by [Tripo3D](https://studio.tripo3d.ai/?via=phi1). Built and deployed using [Replit](https://replit.com/refer/phi1) and [Railway](https://railway.com/).

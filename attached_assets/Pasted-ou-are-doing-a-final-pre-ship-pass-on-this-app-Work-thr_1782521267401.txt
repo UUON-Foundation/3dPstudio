@@ -1,0 +1,84 @@
+ou are doing a final pre-ship pass on this app. Work through the phases below in order. Do not skip ahead, do not declare the app "ready" until every checklist item in every phase is explicitly verified. For each phase, report back what you found and what you changed before moving to the next phase.
+
+
+PHASE 1 — Full audit (read-only, no changes yet)
+
+Go through every file in the project, including config files, .md files, attached_assets, and git history. Produce a written report covering:
+
+
+Bugs and broken paths — dead routes, unused imports, mismatched types between client/server, any TODO/FIXME comments, any code that references files or env vars that don't exist.
+Bottlenecks — anything that blocks on synchronous work that should be async, anything with no loading/error state in the UI, any API call with no retry/timeout handling, any N+1 database query pattern if a DB is involved.
+Security/secrets exposure — search the ENTIRE git history (not just current files) for API keys, database connection strings, emails, or personal names. Use:
+git log --all -p | grep -iE "api_key|secret|password|@gmail|@yahoo|postgresql://.*:.*@|TRIPO_API_KEY"
+List every match with commit hash and file, even if it looks like a placeholder — I will decide what's real.
+Personal information — every instance of a real name, personal email address, or personally identifying detail anywhere in code, comments, README files, commit messages, or UI text. List each one with file and line number.
+Branding inconsistencies — every instance of any app/product name other than "UUON Pstudio" anywhere in the codebase (UI text, page titles, README, package.json name field, meta tags, comments). List each one.
+Dependency health — run npm outdated and npm audit, report anything flagged high/critical severity, and note any dependency that's clearly abandoned (no updates in 2+ years) where a maintained open-source alternative exists.
+Opportunities for enhancement — anything that's functionally working but objectively weak: missing input validation, missing empty/error states, accessibility gaps (missing alt text, poor contrast, no keyboard navigation), missing mobile responsiveness.
+
+
+Do not fix anything yet. Just report.
+
+
+PHASE 2 — Confirm scope with me
+
+After Phase 1, stop and summarize:
+
+
+Total count of issues per category above
+Which ones are quick fixes vs. which need a design/architecture decision from me
+Any case where removing something (a name, an email, a branding reference) might break functionality (e.g. an email used as a real auth identifier vs. a hardcoded contact string)
+
+
+Wait for my go-ahead before Phase 3 if anything is ambiguous. If everything is unambiguous, proceed.
+
+
+PHASE 3 — Remediation
+
+
+Remove all personal information found in Phase 1 — names, emails, anything personally identifying. Replace with generic placeholders where structurally needed (e.g. a contact email field becomes contact@example.com or an env var, not deleted if the UI depends on it existing).
+Rename everything to "UUON Pstudio" — every UI string, page title, meta tag, package.json name, README header, anywhere the product is referred to by any other name. Keep this consistent — same capitalization, same spacing, everywhere.
+Fix every bug and bottleneck identified in Phase 1, in order of severity (security/secrets first, then broken functionality, then performance, then polish).
+Rotate any real secret found exposed in git history — do not just remove it going forward, since old commits still expose it. Flag this to me explicitly so I can regenerate the actual key/password on the provider's dashboard.
+Address dependency issues — update anything flagged in npm audit as high/critical. If a maintained, well-adopted open-source library exists that fixes a gap better than a custom patch (e.g. a date library, a validation library, a UI primitive), use it instead of hand-rolling a fix, but justify the choice in one sentence per library added.
+
+
+After each fix, re-run the relevant audit command from Phase 1 to confirm it's actually resolved, not just edited.
+
+
+PHASE 4 — Aesthetic upgrade (frontend only)
+
+Target feel: classy, clean, minimal. Not flashy, not cluttered, not generic SaaS-template-looking. Think confident and restrained rather than busy.
+
+
+Audit every screen/component for:
+
+Inconsistent spacing, font sizes, or color usage
+Default/unstyled browser elements (buttons, inputs, selects) that haven't been intentionally styled
+Visual hierarchy problems (is it obvious what's most important on each screen?)
+
+
+
+Establish and apply ONE consistent design language across the whole app — consistent spacing scale, consistent corner radius, consistent type scale, a restrained color palette (no more than 2-3 accent colors total). If the project already has a partial design system in place (check for existing color/typography conventions in the codebase), build on that instead of starting over, unless it conflicts with "classy and clean."
+Specifically clean up: button states (hover/active/disabled all need to look intentional, not default), form inputs, loading states, empty states, and any 3D viewer UI chrome (it should frame the model, not compete with it).
+Do not add animation, gradients, or visual effects for their own sake. "Clean" means restraint, not minimalism-as-emptiness — the app should still feel complete and considered, just not noisy.
+Mobile/responsive check — verify the upgraded UI doesn't break on smaller viewports.
+
+
+Show me a before/after summary of what changed per screen, not just a diff dump.
+
+
+PHASE 5 — Final ship check
+
+Before declaring this ready:
+
+
+ Re-run the Phase 1 security grep — zero matches on real secrets
+ Re-run a search for personal names/emails — zero matches
+ Re-run a search for any product name other than "UUON Pstudio" — zero matches
+ npm audit — zero high/critical
+ App builds and runs clean from a fresh clone with no leftover local state
+ Every screen has been visually reviewed for the Phase 4 design language
+
+
+Report each checklist item as pass/fail with evidence (the actual command output, not just "done").

@@ -1,0 +1,57 @@
+It sounds like you're dealing with broken or improperly exported GLB models, especially baked animations that aren't working, and possibly the same corrupt or placeholder model being repeatedly generated or returned (hence the identical number like -34490).
+
+Let's cut to the chase. Here's:
+
+✅ A MASTER PROMPT FOR RELIABLE GLB EXPORTS WITH BAKED ANIMATION:
+You are a professional 3D artist and GLTF/GLB pipeline expert. I need you to create a GLB file with the following requirements:
+
+1. The model must be exported in GLB (binary glTF) format.
+2. All mesh, texture, material, and rig data must be properly embedded — no external references.
+3. The animation must be fully baked into the GLB file. This means:
+   - All bones and skeletal animation data are baked per frame.
+   - No external rig or constraints required to play the animation.
+   - Compatible with three.js, Babylon.js, and GLTF viewers.
+4. Ensure:
+   - The animation plays from frame 0 to end when loaded.
+   - No placeholder, default, or corrupted mesh (e.g., not a static T-pose or corrupted frame like `-34490`).
+   - No animation retargeting required post-export.
+5. The GLB must be under [YOUR SIZE LIMIT MB].
+6. Confirm the GLB loads and animates correctly in https://gltf-viewer.donmccurdy.com/
+
+If baking from Blender, use:
+- Apply all transforms (Ctrl+A → Location, Rotation, Scale).
+- Bake all actions (Object → Animation → Bake Action, check "Only Selected", "Visual Keying", "Clear Constraints", "Clear Parents" if needed).
+- Use File → Export → glTF 2.0 (.glb) with options:
+   - Format: GLB Binary
+   - Include: Selected Objects
+   - Animation: Baked
+   - Check “Apply Modifiers”, “Include Animation”, and ensure “Always Sample Animations” is enabled.
+
+Only export working GLBs that pass visual and animation inspection.
+
+Do not return a reused or corrupt model. If you must regenerate from scratch, do so.
+
+🛠️ Common Causes of Your Problem:
+
+"Dead" models = T-pose or default state with animation data missing or not linked.
+
+Identical number like -34490 = Possibly a fallback value or vertex count from a default model getting reused. Check your generation process isn't calling the same bad cached output.
+
+AI agents failing = Many are not checking GLB output validity. You need either:
+
+A visual inspection step.
+
+A script to load and verify GLB animation in Three.js or Babylon.
+
+🔁 Rapid Fix Strategy:
+
+Use Don McCurdy’s GLTF Viewer (https://gltf-viewer.donmccurdy.com/
+) to test every file.
+
+If using Blender: Always bake animation before export.
+
+Scripted Validation: Use a basic Three.js or Node script to auto-check if animations exist and contain more than one keyframe.
+
+Regenerate Prompt Above in your AI pipeline and hard-code a QA step.
+
+Clear cache if you're getting the same file again and again — it could be cached due to a repeat prompt or token.
